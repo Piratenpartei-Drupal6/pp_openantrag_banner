@@ -17,7 +17,7 @@ $("#pp_openantrag_banner_linkage").ready(function() {
     pp_openantrag_banner_texts[3] = "Viele Schnittstellen";
     pp_openantrag_banner_texts[4] = "Deine Verbesserungsidee";
 
-    $("#pp_openantrag_banner_linkage").on("click", function() {
+    $("#pp_openantrag_banner_linkage").click(function() {
         window.open(pp_openantrag_banner_links[pp_openantrag_banner_current], '_blank');
     });
 
