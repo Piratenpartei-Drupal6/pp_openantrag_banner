@@ -48,9 +48,9 @@ $("#pp_openantrag_banner_linkage").ready(function() {
 	function pp_openantrag_banner_loadParlamente() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList&jsonp=pp_openantrag_banner_setParlamente',
+            url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList', //&jsonp=pp_openantrag_banner_setParlamente',
             async: false,
-			jsonp: false,
+			jsonp: "jsonp",
             jsonpCallback: 'pp_openantrag_banner_setParlamente',
             contentType: "application/json",
             dataType: 'jsonp',
