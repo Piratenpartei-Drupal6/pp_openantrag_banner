@@ -41,10 +41,9 @@ $("#pp_openantrag_banner_linkage").ready(function() {
 	function pp_openantrag_banner_loadParlamente() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList', //&jsonp=pp_openantrag_banner_setParlamente',
+            url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList',
             async: false,
 			jsonp: "jsonp",
-            /*jsonpCallback: 'pp_openantrag_banner_setParlamente',*/
             contentType: "application/json",
             dataType: 'jsonp',
 			success: function(json) {
@@ -58,41 +57,35 @@ $("#pp_openantrag_banner_linkage").ready(function() {
         });
     }
 
-	
-	function pp_openantrag_banner_setAntraege(json) {
-		pp_openantrag_banner_texts[1] = pp_openantrag_banner_texts[1].replace("{x}", json);
-        pp_openantrag_banner_loadThemen();
-	}
-
     function pp_openantrag_banner_loadAntraege() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'proposal/all/GetCount&jsonp=pp_openantrag_banner_setAntraege',
+            url: pp_openantrag_banner_apiUrl + 'proposal/all/GetCount',
             async: false,
-			jsonp: false,
-            jsonpCallback: 'pp_openantrag_banner_setAntraege',
+			jsonp: "jsonp",
             contentType: "application/json",
             dataType: 'jsonp',
+			success: function(json) {
+				pp_openantrag_banner_texts[1] = pp_openantrag_banner_texts[1].replace("{x}", json);
+				pp_openantrag_banner_loadThemen();
+			},
             error: function(e) {
                console.log(e.message);
             }
         });
     }
-
-	
-	function pp_openantrag_banner_setThemen(json) {
-		pp_openantrag_banner_texts[2] = pp_openantrag_banner_texts[2].replace("{x}", json.length);
-	}
     
     function pp_openantrag_banner_loadThemen() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'proposal/GetTags&jsonp=pp_openantrag_banner_setThemen',
+            url: pp_openantrag_banner_apiUrl + 'proposal/GetTags',
             async: false,
-			jsonp: false,
-            jsonpCallback: 'pp_openantrag_banner_setThemen',
+			jsonp: "jsonp",
             contentType: "application/json",
             dataType: 'jsonp',
+			success: function(json) {
+				pp_openantrag_banner_texts[2] = pp_openantrag_banner_texts[2].replace("{x}", json.length);
+			},
             error: function(e) {
                console.log(e.message);
             }
