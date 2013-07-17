@@ -37,8 +37,15 @@ $("#pp_openantrag_banner_linkage").ready(function() {
         pp_openantrag_banner_updateSprite();
         pp_openantrag_banner_timer = window.setInterval(pp_openantrag_banner_timerHandler, 5000);
     }
+
     
-    function pp_openantrag_banner_loadParlamente() {
+	function pp_openantrag_banner_setParlamente(json) {
+		pp_openantrag_banner_texts[0] = pp_openantrag_banner_texts[0].replace("{x}", json.length);
+		pp_openantrag_banner_loadAntraege();
+		pp_openantrag_banner_startAnimation();
+	}
+    
+	function pp_openantrag_banner_loadParlamente() {
         $.ajax({
             type: 'GET',
             url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList&jsonp=pp_openantrag_banner_setParlamente',
@@ -52,11 +59,11 @@ $("#pp_openantrag_banner_linkage").ready(function() {
             }
         });
     }
+
 	
-	function pp_openantrag_banner_setParlamente(json) {
-		pp_openantrag_banner_texts[0] = pp_openantrag_banner_texts[0].replace("{x}", json.length);
-		pp_openantrag_banner_loadAntraege();
-		pp_openantrag_banner_startAnimation();
+	function pp_openantrag_banner_setAntraege(json) {
+		pp_openantrag_banner_texts[1] = pp_openantrag_banner_texts[1].replace("{x}", json);
+        pp_openantrag_banner_loadThemen();
 	}
 
     function pp_openantrag_banner_loadAntraege() {
@@ -73,12 +80,12 @@ $("#pp_openantrag_banner_linkage").ready(function() {
             }
         });
     }
+
 	
-	function pp_openantrag_banner_setAntraege(json) {
-		pp_openantrag_banner_texts[1] = pp_openantrag_banner_texts[1].replace("{x}", json);
-        pp_openantrag_banner_loadThemen();
+	function pp_openantrag_banner_setThemen(json) {
+		pp_openantrag_banner_texts[2] = pp_openantrag_banner_texts[2].replace("{x}", json.length);
 	}
- 
+    
     function pp_openantrag_banner_loadThemen() {
         $.ajax({
             type: 'GET',
@@ -94,9 +101,5 @@ $("#pp_openantrag_banner_linkage").ready(function() {
         });
     }
 	
-	function pp_openantrag_banner_setThemen(json) {
-		pp_openantrag_banner_texts[2] = pp_openantrag_banner_texts[2].replace("{x}", json.length);
-	}
-    
     pp_openantrag_banner_loadParlamente();
 });
