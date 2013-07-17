@@ -1,0 +1,78 @@
+<?php
+
+/**
+* Display help and module information.
+* @param path
+*   Which path of the site we're displaying help.
+* @param arg
+*   Array that holds the current path as would be returned from arg() function.
+* @return
+*   help text for the path.
+*/
+function pp_openantrag_banner_help($path, $arg) {
+  $output = '';
+  switch ($path) {
+    case "admin/help#pp_openantrag_banner":
+      $output = '<p>'. t("Zeigt den Block des openantrag.de-Banner").'</p>';
+      break;
+  }
+  return $output;
+} // function pp_openantrag_banner_help
+
+
+/**
+ * Implementation of hook_init().
+ *
+ * These includes do not need to be loaded for cached pages.
+ */
+function pp_openantrag_banner_init() {
+  // Add necessary CSS and JS.
+  // TODO: These shouldn't be loaded on every page, but block caching omits
+  // CSS and JS files that would be otherwise added.
+  drupal_add_css(drupal_get_path('module', 'pp_openantrag_banner') .'/pp_openantrag_banner.css');
+  drupal_add_js(drupal_get_path('module', 'pp_openantrag_banner') .'/pp_openantrag_banner.js');
+
+  // prevent caching
+  #$GLOBALS['conf']['cache'] = FALSE;
+}
+
+
+/**
+* Valid permissions for this module
+* @return array An array of valid permissions for the pp_openantrag_banner module
+*/
+
+function pp_openantrag_banner_perm() {
+  return array('administer pp_openantrag_banner');
+} // function pp_openantrag_banner_perm()
+
+
+/**
+* Generate HTML for the pp_openantrag_banner block
+* @param op the operation from the URL
+* @param delta offset
+* @returns block HTML
+*/
+function pp_openantrag_banner_block($op = 'list', $delta = '', $edit = array()) {
+	// listing of blocks, such as on the admin/block page
+		switch ($op) {
+			case "list":
+				$block[0]["info"] = "Piraten - ".t('openantrag.de-Banner');
+				$block[0]['cache'] = BLOCK_NO_CACHE;
+				/* set cache -1 in blocks table https://drupal.org/node/791142 */
+				return $block;
+
+			case "view":
+				// set up the block
+					$module_path = drupal_get_path('module', 'pp_openantrag_banner');
+					
+					$block['subject'] = t('openantrag.de-Banner');
+					$block['content'] = '<div id="pp_openantrag_banner_linkage">'.
+										'<img id="pp_openantrag_banner_header" src="'.$module_path.'/pp_openantrag_banner_header.jpg" alt="openantrag.de" border="0" width="160" height="46" />'.
+										'<div id="pp_openantrag_banner_sprite"><div id="pp_openantrag_banner_text">openantrag.de</div></div>'.
+										'</div>';
+					return $block;
+		}
+}
+
+?>

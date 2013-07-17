@@ -1,0 +1,6 @@
+; $Id$
+package = Piratenpartei
+name = Piratenpartei openantrag.de-Banner
+description = Zeigt den Block des openantrag.de-Banner.
+core = 6.x
+version = "6.x-1.0"
