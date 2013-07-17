@@ -38,22 +38,20 @@ $("#pp_openantrag_banner_linkage").ready(function() {
         pp_openantrag_banner_timer = window.setInterval(pp_openantrag_banner_timerHandler, 5000);
     }
 
-    
-	function pp_openantrag_banner_setParlamente(json) {
-		pp_openantrag_banner_texts[0] = pp_openantrag_banner_texts[0].replace("{x}", json.length);
-		pp_openantrag_banner_loadAntraege();
-		pp_openantrag_banner_startAnimation();
-	}
-    
 	function pp_openantrag_banner_loadParlamente() {
         $.ajax({
             type: 'GET',
             url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList', //&jsonp=pp_openantrag_banner_setParlamente',
             async: false,
 			jsonp: "jsonp",
-            jsonpCallback: 'pp_openantrag_banner_setParlamente',
+            /*jsonpCallback: 'pp_openantrag_banner_setParlamente',*/
             contentType: "application/json",
             dataType: 'jsonp',
+			success: function(json) {
+				pp_openantrag_banner_texts[0] = pp_openantrag_banner_texts[0].replace("{x}", json.length);
+				pp_openantrag_banner_loadAntraege();
+				pp_openantrag_banner_startAnimation();
+			},
             error: function(e) {
                console.log(e.message);
             }
