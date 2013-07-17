@@ -66,9 +66,9 @@ function pp_openantrag_banner_block($op = 'list', $delta = '', $edit = array()) 
 				// set up the block
 					$module_path = drupal_get_path('module', 'pp_openantrag_banner');
 					
-					$block['subject'] = t('openantrag.de-Banner');
+					$block['subject'] = t('Bürgeranträge');
 					$block['content'] = '<div id="pp_openantrag_banner_linkage">'.
-										'<img id="pp_openantrag_banner_header" src="'.$module_path.'/pp_openantrag_banner_header.jpg" alt="openantrag.de" border="0" width="160" height="46" />'.
+										'<img id="pp_openantrag_banner_header" src="/'.$module_path.'/pp_openantrag_banner_header.jpg" alt="openantrag.de" border="0" width="160" height="46" />'.
 										'<div id="pp_openantrag_banner_sprite"><div id="pp_openantrag_banner_text">openantrag.de</div></div>'.
 										'</div>';
 					return $block;
