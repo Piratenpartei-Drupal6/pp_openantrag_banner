@@ -41,56 +41,59 @@ $("#pp_openantrag_banner_linkage").ready(function() {
     function pp_openantrag_banner_loadParlamente() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList&jsonp=parlamente',
+            url: pp_openantrag_banner_apiUrl + 'representation/GetKeyValueList&jsonp=pp_openantrag_banner_setParlamente',
             async: false,
-            jsonpCallback: 'parlamente',
+            jsonpCallback: 'pp_openantrag_banner_setParlamente',
             contentType: "application/json",
             dataType: 'jsonp',
-            success: function(json) {
-                pp_openantrag_banner_texts[0] = pp_openantrag_banner_texts[0].replace("{x}", json.length);
-                pp_openantrag_banner_loadAntraege();
-                pp_openantrag_banner_startAnimation();
-            },
             error: function(e) {
                console.log(e.message);
             }
         });
     }
+	
+	function pp_openantrag_banner_setParlamente(json) {
+		pp_openantrag_banner_texts[0] = pp_openantrag_banner_texts[0].replace("{x}", json.length);
+		pp_openantrag_banner_loadAntraege();
+		pp_openantrag_banner_startAnimation();
+	}
 
     function pp_openantrag_banner_loadAntraege() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'proposal/all/GetCount&jsonp=antraege',
+            url: pp_openantrag_banner_apiUrl + 'proposal/all/GetCount&jsonp=pp_openantrag_banner_setAntraege',
             async: false,
-            jsonpCallback: 'antraege',
+            jsonpCallback: 'pp_openantrag_banner_setAntraege',
             contentType: "application/json",
             dataType: 'jsonp',
-            success: function(json) {
-                pp_openantrag_banner_texts[1] = pp_openantrag_banner_texts[1].replace("{x}", json);
-                pp_openantrag_banner_loadThemen();
-            },
             error: function(e) {
                console.log(e.message);
             }
         });
     }
+	
+	function pp_openantrag_banner_setAntraege(json) {
+		pp_openantrag_banner_texts[1] = pp_openantrag_banner_texts[1].replace("{x}", json);
+        pp_openantrag_banner_loadThemen();
+	}
  
     function pp_openantrag_banner_loadThemen() {
         $.ajax({
             type: 'GET',
-            url: pp_openantrag_banner_apiUrl + 'proposal/GetTags&jsonp=themen',
+            url: pp_openantrag_banner_apiUrl + 'proposal/GetTags&jsonp=pp_openantrag_banner_setThemen',
             async: false,
-            jsonpCallback: 'themen',
+            jsonpCallback: 'pp_openantrag_banner_setThemen',
             contentType: "application/json",
             dataType: 'jsonp',
-            success: function(json) {
-                pp_openantrag_banner_texts[2] = pp_openantrag_banner_texts[2].replace("{x}", json.length);
-            },
             error: function(e) {
                console.log(e.message);
             }
         });
     }
+	
+	function pp_openantrag_banner_setThemen(json) {
+		pp_openantrag_banner_texts[2] = pp_openantrag_banner_texts[2].replace("{x}", json.length);
+	}
     
     pp_openantrag_banner_loadParlamente();
 });
