@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$("#pp_openantrag_banner_linkage").ready(function() {
     var pp_openantrag_banner_timer;
     var pp_openantrag_banner_current = 0;
     var pp_openantrag_banner_apiUrl = "https://www.piratenpartei-hessen.de/node-jsonp-proxy/?url=http://www.openantrag.de/api/";
