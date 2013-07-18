@@ -29,6 +29,7 @@ function pp_openantrag_banner_init() {
   // Add necessary CSS and JS.
   // TODO: These shouldn't be loaded on every page, but block caching omits
   // CSS and JS files that would be otherwise added.
+  drupal_add_css(drupal_get_path('module', 'pp_openantrag_banner') .'/fonts/stylesheet.css');
   drupal_add_css(drupal_get_path('module', 'pp_openantrag_banner') .'/pp_openantrag_banner.css');
   drupal_add_js(drupal_get_path('module', 'pp_openantrag_banner') .'/pp_openantrag_banner.js');
 
