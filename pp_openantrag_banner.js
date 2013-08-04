@@ -23,7 +23,7 @@ $("#pp_openantrag_banner_linkage").ready(function() {
 
     function pp_openantrag_banner_updateSprite() {
         $("#pp_openantrag_banner_text").html(pp_openantrag_banner_texts[pp_openantrag_banner_current]);
-        $('#pp_openantrag_banner_sprite').css('background-position-y', pp_openantrag_banner_current*-167+"px");
+        $('#pp_openantrag_banner_sprite').css('background-position', "0 "+(-167*pp_openantrag_banner_current)+"px");
     }
     
     function pp_openantrag_banner_timerHandler() {
